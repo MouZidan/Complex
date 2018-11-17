@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:id="@+id/content"
+    tools:context=".MainActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/displayBackground"
+        android:animateLayoutChanges="true"
+        android:id="@+id/output_interface_layout"
+
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:animateLayoutChanges="true"
+
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_bracket_open_right" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3"
+            android:animateLayoutChanges="true"
+
+            >
+
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d00"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+
+                />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d01"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d02"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d10"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+
+                />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d11"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d12"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d20"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d21"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d22"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+        </GridLayout>
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_bracket_open_left" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text=" -1"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_bracket_open_right" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:rowCount="3"
+            android:animateLayoutChanges="true"
+
+            >
+
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d00_res"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+
+                />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d01_res"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d02_res"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+        </GridLayout>
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_bracket_open_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" = "
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:animateLayoutChanges="true"
+
+        >
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/square_bracket_open_right"
+            android:tint="@color/orange"
+            android:tintMode="add" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:rowCount="3">
+
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d00_sol"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+
+                />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d01_sol"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+            <com.mou.complex.CMathView
+                android:id="@+id/d02_sol"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+
+        </GridLayout>
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/square_bracket_open_left"
+            android:tint="@color/orange"
+            android:tintMode="add" />
+
+    </LinearLayout>
+
+
+
+        <com.mou.complex.CMathView
+            android:id="@+id/input_mv"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_interface_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:animateLayoutChanges="true"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:columnCount="4"
+            android:rowCount="4">
+
+            <Button
+                android:id="@+id/btn_7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="7"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="8"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="?attr/selectableItemBackground"
+                android:text="9"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+
+                />
+
+            <Button
+                android:id="@+id/btn_del"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:foreground="@drawable/ic_backspace"
+                android:textColor="@color/orange"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="4"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="5"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="?attr/selectableItemBackground"
+                android:text="6"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+
+                />
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="+"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="1"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="2"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="?attr/selectableItemBackground"
+                android:text="3"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+
+                />
+
+            <Button
+                android:id="@+id/btn_subtract"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="-"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_dot"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="."
+                android:textColor="@color/orange"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_i"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:foreground="@drawable/ic_imaginary"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp"
+
+                />
+
+            <Button
+                android:id="@+id/btn_ang"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="&#8736;"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
+
+        </GridLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+
+            >
+
+            <com.mou.complex.Dpad
+                android:id="@+id/dpad"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/dpad" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:columnCount="4"
+                android:rowCount="1">
+
+                <Button
+                    android:id="@+id/btn_load"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="L"
+                    android:textColor="@android:color/holo_orange_light"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_clear"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="clr"
+                    android:textColor="@android:color/holo_orange_light"
+                    android:textSize="18sp" />
+
+            </GridLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/loading_screen"
+        android:alpha="0.95"
+        android:animateLayoutChanges="true"
+
+        >
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView"
+            android:visibility="visible"
+            app:indicatorName="BallTrianglePathIndicator"
+            app:indicatorColor="@color/orange"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading Engine.."
+            android:textColor="@color/orange"
+            android:id="@+id/loading_text"
+            />
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
