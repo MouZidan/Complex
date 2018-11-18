@@ -267,7 +267,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:animateLayoutChanges="true"
-        android:gravity="center"
+        android:gravity="bottom|center"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
@@ -276,7 +276,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/colorPrimaryDark"
-            android:columnCount="4"
+            android:columnCount="5"
             android:rowCount="4">
 
             <Button
@@ -308,6 +308,16 @@
                 android:textSize="18sp"
 
                 />
+
+            <Button
+                android:id="@+id/btn_multiply"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:foregroundGravity="center"
+                android:text="×"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_del"
@@ -349,11 +359,21 @@
                 />
 
             <Button
-                android:id="@+id/btn_add"
+                android:id="@+id/btn_divide"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="?attr/selectableItemBackground"
-                android:text="+"
+                android:foregroundGravity="center"
+                android:textColor="@android:color/holo_orange_light"
+                android:text="÷"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_ang"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="&#8736;"
                 android:textColor="@android:color/holo_orange_light"
                 android:textSize="18sp" />
 
@@ -397,6 +417,27 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/btn_i"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:foreground="@drawable/ic_imaginary"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp"
+
+                />
+
+            <Button
+                android:id="@+id/btn_settings"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:foreground="@drawable/ic_settings"
+                android:foregroundGravity="center"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
+
+            <Button
                 android:id="@+id/btn_0"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -415,24 +456,23 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/btn_i"
+                android:id="@+id/btn_add"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="?attr/selectableItemBackground"
-                android:foreground="@drawable/ic_imaginary"
-                android:textColor="@android:color/holo_orange_light"
-                android:textSize="18sp"
-
-                />
-
-            <Button
-                android:id="@+id/btn_ang"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="?attr/selectableItemBackground"
-                android:text="&#8736;"
+                android:text="+"
                 android:textColor="@android:color/holo_orange_light"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_load"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="L"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="18sp" />
+
 
         </GridLayout>
 
@@ -458,23 +498,6 @@
                 android:columnCount="4"
                 android:rowCount="1">
 
-                <Button
-                    android:id="@+id/btn_load"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="L"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/btn_clear"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="clr"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="18sp" />
 
             </GridLayout>
         </LinearLayout>
@@ -482,32 +505,32 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/loading_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.95"
+        android:animateLayoutChanges="true"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/loading_screen"
-        android:alpha="0.95"
-        android:animateLayoutChanges="true"
 
-        >
+        android:visibility="visible">
+
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/loading_indicator"
+            style="@style/AVLoadingIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/AVLoadingIndicatorView"
             android:visibility="visible"
-            app:indicatorName="BallTrianglePathIndicator"
             app:indicatorColor="@color/orange"
-            />
+            app:indicatorName="BallTrianglePathIndicator" />
+
         <TextView
+            android:id="@+id/loading_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="loading Engine.."
-            android:textColor="@color/orange"
-            android:id="@+id/loading_text"
-            />
+            android:textColor="@color/orange" />
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

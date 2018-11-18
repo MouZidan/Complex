@@ -1,13 +1,15 @@
 package com.mou.complex;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.io.File;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,22 +30,24 @@ public class MainActivity extends AppCompatActivity {
     private CMathView[] outputMathViews;
     private CMathView busMathView;
     private Button[] buttons;
-
     private CoordinatorLayout content;//the entire layout
-    private int highlightSelectColor = Color.RED;
+    //private int highlightSelectColor = Color.RED; //TODO future version
     private int highlightCursorColor = Color.GRAY;
     private int selectedElement = 0;
     private String inputString;
-
     private boolean isInputEdited;
+    private LinearLayout loadingScreen;
+    private TextView loadingText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AVLoadingIndicatorView indicator = findViewById(R.id.loading_indicator);
-        final LinearLayout loadingScreen = findViewById(R.id.loading_screen);
-        TextView loadingText = findViewById(R.id.loading_text);
+
+
+        loadingScreen = findViewById(R.id.loading_screen);
+        loadingText = findViewById(R.id.loading_text);
         content = findViewById(R.id.content);
         inputMathViews = new CMathView[]{
                 findViewById(R.id.d00),
@@ -81,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.btn_i),
                 findViewById(R.id.btn_ang),
                 findViewById(R.id.btn_load),
-                findViewById(R.id.btn_clear)
+                findViewById(R.id.btn_settings),
+                findViewById(R.id.btn_multiply),
+                findViewById(R.id.btn_divide)
 
 
         };
@@ -159,6 +167,18 @@ public class MainActivity extends AppCompatActivity {
 
 
                         break;
+                    case R.id.btn_multiply:
+                        //TODO next update deals with expression
+                        inputString = inputString.concat("*");
+
+
+                        break;
+                    case R.id.btn_divide:
+                        //TODO next update deals with expression
+                        inputString = inputString.concat("/");
+
+
+                        break;
                     case R.id.btn_i:
                         inputString = inputString.concat("i");
 
@@ -168,14 +188,31 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.btn_load:
-                        inputString = inputMathViews[selectedElement].getText().replace("$", "");
-                        busMathView.setText(inputString);
-                        break;
-                    case R.id.btn_clear:
 
-                        inputMathViews[selectedElement].setText("");
-                        busMathView.setText("");
-                        inputString = "";
+                        if (isInputEdited) {
+                            final Snackbar confirmationSnackbar = Snackbar.make(content, "You are about to replace current inputs with the value of selected element", Snackbar.LENGTH_LONG);
+                            confirmationSnackbar.getView().setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryDark));
+                            confirmationSnackbar.setAction("Proceed", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    inputString = inputMathViews[selectedElement].getText().replace("$", "");
+                                    busMathView.setText(inputString);
+                                }
+                            });
+                            confirmationSnackbar.setActionTextColor(ContextCompat.getColor(MainActivity.this, R.color.orange));
+                            confirmationSnackbar.show();
+                        } else {
+                            inputString = inputMathViews[selectedElement].getText().replace("$", "");
+                            busMathView.setText(inputString);
+                        }
+
+
+                        break;
+                    case R.id.btn_settings:
+                        //TODO implement this
+                        //Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        //startActivity(intent);
+
                         break;
 
                 }
@@ -193,10 +230,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 int dpadWidth = dpad.getWidth();
-                final int newButtonDimensions = (screenWidth-dpadWidth)/4;
+                final int newButtonDimensions = screenWidth / 8;
                 for (final Button btn : buttons){
-                    Log.d(TAG, "run: screenWidth="+screenWidth+" dpad.getWidth()="+dpad.getWidth());
-                    Log.d(TAG, "run: old="+  btn.getWidth()+" new="+newButtonDimensions);
                     btn.setOnClickListener(buttonsListener);
                     btn.post(new Runnable() {
                         @Override
@@ -208,6 +243,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+                ViewGroup.LayoutParams params = dpad.getLayoutParams();
+                params.width = newButtonDimensions * 3;
+                params.height = newButtonDimensions * 3;
+                dpad.setLayoutParams(params);
                 dpad.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
@@ -277,31 +316,51 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        final Handler handler = new Handler();
-        final Runnable uiRunnable = new Runnable() {
-            @Override
-            public void run() {
+        {/**___________LOAD RECOVERY FILE IF EXISTS___________**/
+            final Handler handler = new Handler();
+            final Runnable uiRunnable = new Runnable() {
+                @Override
+                public void run() {
 
 
-                boolean isFinished = true;
-                for(CMathView mv: inputMathViews){
-                    if(!mv.isLoadingFinished()){
-                        isFinished =false;
-                        break;
+                    boolean isFinished = true;
+                    for (CMathView mv : inputMathViews) {
+                        if (!mv.isLoadingFinished()) {
+                            isFinished = false;
+                            break;
+                        }
                     }
-                }
-                if(isFinished) for(CMathView mv: outputMathViews){
-                    if(!mv.isLoadingFinished()){
-                        isFinished =false;
-                        break;
+                    if (isFinished) for (CMathView mv : outputMathViews) {
+                        if (!mv.isLoadingFinished()) {
+                            isFinished = false;
+                            break;
+                        }
                     }
+                    if (isFinished) loadingScreen.setVisibility(View.GONE);
+                    else handler.postDelayed(this, 100);
                 }
-                if(isFinished)loadingScreen.setVisibility(View.GONE);
-                else handler.postDelayed(this, 100);
+            };
+            handler.post(uiRunnable);
+            if (Utillities.isFileExists(this, Utillities.RECOVERY_FILE_NAME)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("do you want to recover last season?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                loadRecovery();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
             }
-        };
-        handler.post(uiRunnable);
-
+        }
     }
 
     private void solve() {
@@ -310,7 +369,8 @@ public class MainActivity extends AppCompatActivity {
         Complex[] resCol = new Complex[3];
 
         for(int i =0; i<inputMathViews.length; i++){
-            Complex c = Complex.parseComplex(inputMathViews[i].getText().replace("$",""));
+            String evaluatorForm = inputMathViews[i].getText().replace("$", "");
+            Complex c = ComplexEvaluator.evaluate(evaluatorForm);
             if(c == null){
                 //error
                 selectedElement = i;
@@ -320,6 +380,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             }
+            inputMathViews[i].setText(c.toString());
             if(i ==3|| i==7|| i==11){
                 resCol[i%3] = c;
 
@@ -331,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
         ComplexMatrix3x3 inverse = matrix.inverse();
         if(inverse==null){
             //no solution
-            makeColoredSnackbar("No solution for this system for this system equations!", Color.DKGRAY, Snackbar.LENGTH_LONG, Gravity.TOP);
+            makeColoredSnackbar("No solution for this system equations!", Color.DKGRAY, Snackbar.LENGTH_LONG, Gravity.TOP);
             return;
         }
         Complex[] solution = inverse.multiplyByColMat(
@@ -359,6 +420,77 @@ public class MainActivity extends AppCompatActivity {
         busMathView.setText("");
 
 
+    }
+
+
+    private String toEvaluatorFormat(String string) {
+        return null;
+    }
+
+    @Override
+    protected void onPause() {
+        saveRecovery(makeRecoverableInputs());
+        super.onPause();
+    }
+
+    private String saveSettings(String settings) {
+
+        return null;
+    }
+
+    private boolean loadSettings() {
+
+        return false;
+    }
+
+    private String makeRecoverableInputs() {
+        StringBuilder builder = new StringBuilder();
+        for (CMathView mathView : inputMathViews) {
+            builder.append(mathView.getText().replace("$", ""));
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private boolean saveRecovery(String applicationFormat) {
+        boolean discardState = true;
+        for (CMathView mathView : inputMathViews) {
+            if (!mathView.getText().equals("$$0$$")) {
+                discardState = false;
+                break;
+            }
+        }
+        if (discardState) {
+            File stateFile = new File(getFilesDir(), "last_state.tmp");
+            if (stateFile.exists()) {
+                stateFile.delete();
+            }
+            return false;
+        }
+
+        return Utillities.saveFile(this, applicationFormat, Utillities.RECOVERY_FILE_NAME);
+    }
+
+    private boolean loadRecovery() {
+        loadingText.setText("Recovering matrix..");
+        loadingScreen.setVisibility(View.VISIBLE);
+        String stateFile = Utillities.loadFile(this, Utillities.RECOVERY_FILE_NAME);
+        if (stateFile != null) {
+            String[] lines = stateFile.split("\n");
+            for (int i = 0; i < inputMathViews.length; i++) {
+                inputMathViews[i].setText(lines[i]);
+            }
+
+            loadingScreen.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadingScreen.setVisibility(View.GONE);
+                }
+            }, 300);
+
+            return true;
+        }
+        return false;
     }
     private void makeColoredSnackbar(String msg, int color, int length, int gravityDir){
         Snackbar snack = Snackbar.make(content, msg, length);

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Complex</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_angle_unit">Angle Unit</string>
+    <string-array name="angle_units_list">
+        <item>Degrees</item>
+        <item>Radians</item>
+    </string-array>
+    <string-array name="angle_units_val">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

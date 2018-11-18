@@ -58,7 +58,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_backspace_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/D:/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -68,8 +68,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff4b41" />
-                            <entry key="outputName" value="ic_keyboard_backspace_black_24dp" />
+                            <entry key="color" value="ffbb33" />
+                            <entry key="outputName" value="ic_settings" />
                             <entry key="sourceFile" value="C:\Users\Mohannad" />
                           </map>
                         </option>
